@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lantern Run: Release Pins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* Layout: single reading column; repo cards with links, then a screenshot gallery grid. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --fg: #1b2230; --muted: #5a6474;
+  --line: #dde1e8; --accent: #c2410c; --note-bg: #fff4e8;
+  --display: "Fraunces", Georgia, serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #11151c; --surface: #19202a; --fg: #e6e9ef; --muted: #9aa4b4;
+    --line: #2a3340; --accent: #fb923c; --note-bg: #2a1f14; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 var(--body); }
+main { max-width: 1080px; margin: 0 auto; padding-block: 40px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { font: 600 2.2rem/1.15 var(--display); margin: 0 0 8px; text-wrap: balance; }
+h2 { font: 600 1.35rem/1.2 var(--display); margin: 40px 0 12px; }
+p { max-width: 65ch; margin: 0 0 12px; }
+.lede { color: var(--muted); }
+.note { background: var(--note-bg); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 4px; max-width: 70ch; }
+.note p { margin: 0 0 6px; } .note p:last-child { margin: 0; }
+code, .mono { font-family: var(--mono); font-size: .9em; }
+.repos { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.repo { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; min-width: 0; }
+.repo h3 { margin: 0 0 4px; font: 600 1rem var(--mono); overflow-wrap: anywhere; }
+.repo p { color: var(--muted); font-size: .92rem; margin-bottom: 12px; }
+.links { display: flex; gap: 8px; flex-wrap: wrap; }
+.links a { text-decoration: none; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 4px 12px; font-weight: 500; font-size: .9rem; }
+.links a:hover, .links a:focus-visible { background: var(--accent); color: var(--surface); }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; min-width: 0; }
+figure a { display: block; }
+figure img { display: block; width: 100%; height: 200px; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); }
+figcaption { padding: 10px 12px; font-size: .88rem; color: var(--muted); }
+figcaption b { color: var(--fg); font-weight: 600; }
+footer { margin-top: 48px; color: var(--muted); font-size: .85rem; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<main>
+<p><a href="../../">&larr; All runs</a></p>
+<h1>Run: 28 Oct 2026, deepseek-chat, release tags</h1>
+<p class="lede">Architecture documents Lantern generated from real OpenWMS code: the Architecture Explorer for engineers and the Executive Brief for leadership. Each link is one self-contained HTML file.</p>
+
+<div class="note">
+<p><b>Test set.</b> 16 OpenWMS repos pinned to release tags: the umbrella repo <code>org.openwms</code> at 4.0.0 (it holds core.util) plus each component's latest release, for example tms.transportation 2.0.0, common.service 3.0.0 and ameba-lib 4.3.0. wms.receiving and its library have no release and stay on their branch heads. 10 of the 16 build; the others are read without a build (degraded mode). Analyzed in one snapshot.</p>
+<p><b>LLM-written text.</b> The overview and summary sentences were written by DeepSeek's chat model (<code>deepseek-chat</code>) through Lantern's Anthropic-compatible provider, prompt version 1. Lantern is designed for Claude, so wording quality may differ. Everything else comes from the real code.</p>
+<p><b>Cost.</b> 1,107 LLM calls for 1,102 summaries: 727k input, 254k cache-hit and 128k output tokens, $0.37 at DeepSeek's peak prices. A second run over the same code made no LLM calls.</p>
+<p><b>Known issues:</b> wide diagrams open cut off until you press Fit; ameba-lib's context diagram (14 dependants) is too small in the Brief; edge lines cross some labels; a summary that cites another summary shows the cited element's name as stray text, in the Brief and in Explorer overviews (#70); 23 summaries show raw citation ranges such as "[F1-F3, F5-F6]" (#78); many summaries say the facts do not show what an element is for, and some repository summaries repeat IDs like "repo:ameba-lib" (#71).</p>
+</div>
+
+<h2>Open a document</h2>
+<div class="repos">
+  <div class="repo">
+    <h3>tms.transportation</h3>
+    <p>Transport order service: 96 Java types. Builds, so its facts come from compiled code.</p>
+    <div class="links"><a href="explorer/tms.transportation.html">Explorer</a><a href="brief/tms.transportation.html">Brief</a></div>
+  </div>
+  <div class="repo">
+    <h3>tms.routing</h3>
+    <p>Routing service, a thin wrapper around its OSIP library. Does not build yet (Activiti host blocked), so read without a build.</p>
+    <div class="links"><a href="explorer/tms.routing.html">Explorer</a><a href="brief/tms.routing.html">Brief</a></div>
+  </div>
+  <div class="repo">
+    <h3>wms.receiving</h3>
+    <p>Receiving service. No release exists, so it stays on its branch head and its unreleased library dependency is flagged as a risk.</p>
+    <div class="links"><a href="explorer/wms.receiving.html">Explorer</a><a href="brief/wms.receiving.html">Brief</a></div>
+  </div>
+  <div class="repo">
+    <h3>ameba-lib</h3>
+    <p>Shared library: 181 Java types, used by 14 other repos. Builds.</p>
+    <div class="links"><a href="explorer/ameba-lib.html">Explorer</a><a href="brief/ameba-lib.html">Brief</a></div>
+  </div>
+  <div class="repo">
+    <h3>common.service</h3>
+    <p>Common service (locations, transport units), packaging its library. Builds now.</p>
+    <div class="links"><a href="explorer/common.service.html">Explorer</a><a href="brief/common.service.html">Brief</a></div>
+  </div>
+  <div class="repo">
+    <h3>core.uaa</h3>
+    <p>User account and authentication service, packaging its library. Builds now.</p>
+    <div class="links"><a href="explorer/core.uaa.html">Explorer</a><a href="brief/core.uaa.html">Brief</a></div>
+  </div>
+</div>
+
+<h2>Screenshots</h2>
+<div class="gallery">
+<figure><a href="screenshots/01-explorer-tms.transportation-overview.png"><img src="screenshots/01-explorer-tms.transportation-overview.png" alt="Explorer · tms.transportation. LLM-written overview and system context." loading="lazy"></a><figcaption><b>Explorer · tms.transportation.</b> LLM-written overview and system context.</figcaption></figure>
+<figure><a href="screenshots/02-explorer-tms.transportation-container-diagram.png"><img src="screenshots/02-explorer-tms.transportation-container-diagram.png" alt="Container diagram. core.util now appears as a library of the umbrella repo org.openwms." loading="lazy"></a><figcaption><b>Container diagram.</b> core.util now appears as a library of the umbrella repo org.openwms.</figcaption></figure>
+<figure><a href="screenshots/03-explorer-tms.transportation-component-diagram.png"><img src="screenshots/03-explorer-tms.transportation-component-diagram.png" alt="Components. Packages and how they use each other." loading="lazy"></a><figcaption><b>Components.</b> Packages and how they use each other.</figcaption></figure>
+<figure><a href="screenshots/04-explorer-tms.transportation-details-panel.png"><img src="screenshots/04-explorer-tms.transportation-details-panel.png" alt="Type details. Summary of TransportationService with fact citations." loading="lazy"></a><figcaption><b>Type details.</b> Summary of TransportationService with fact citations.</figcaption></figure>
+<figure><a href="screenshots/05-explorer-tms.transportation-dark.png"><img src="screenshots/05-explorer-tms.transportation-dark.png" alt="Dark mode." loading="lazy"></a><figcaption><b>Dark mode.</b> </figcaption></figure>
+<figure><a href="screenshots/06-explorer-tms.transportation-phone.png"><img src="screenshots/06-explorer-tms.transportation-phone.png" alt="Phone layout." loading="lazy"></a><figcaption><b>Phone layout.</b> </figcaption></figure>
+<figure><a href="screenshots/07-explorer-tms.routing-overview.png"><img src="screenshots/07-explorer-tms.routing-overview.png" alt="Explorer · tms.routing. Built in degraded mode (Activiti host blocked)." loading="lazy"></a><figcaption><b>Explorer · tms.routing.</b> Built in degraded mode (Activiti host blocked).</figcaption></figure>
+<figure><a href="screenshots/08-explorer-tms.routing-container-diagram.png"><img src="screenshots/08-explorer-tms.routing-container-diagram.png" alt="Container diagram. The service and the OSIP library it packages." loading="lazy"></a><figcaption><b>Container diagram.</b> The service and the OSIP library it packages.</figcaption></figure>
+<figure><a href="screenshots/09-explorer-tms.routing-component-diagram.png"><img src="screenshots/09-explorer-tms.routing-component-diagram.png" alt="Components and Maven tree." loading="lazy"></a><figcaption><b>Components and Maven tree.</b> </figcaption></figure>
+<figure><a href="screenshots/10-explorer-tms.routing-details-panel.png"><img src="screenshots/10-explorer-tms.routing-details-panel.png" alt="Type details. 70% confidence: facts from a failed build." loading="lazy"></a><figcaption><b>Type details.</b> 70% confidence: facts from a failed build.</figcaption></figure>
+<figure><a href="screenshots/11-explorer-wms.receiving-overview.png"><img src="screenshots/11-explorer-wms.receiving-overview.png" alt="Explorer · wms.receiving. No release yet; still on its branch head." loading="lazy"></a><figcaption><b>Explorer · wms.receiving.</b> No release yet; still on its branch head.</figcaption></figure>
+<figure><a href="screenshots/12-explorer-wms.receiving-container-diagram.png"><img src="screenshots/12-explorer-wms.receiving-container-diagram.png" alt="Container diagram." loading="lazy"></a><figcaption><b>Container diagram.</b> </figcaption></figure>
+<figure><a href="screenshots/13-explorer-wms.receiving-component-diagram.png"><img src="screenshots/13-explorer-wms.receiving-component-diagram.png" alt="Components." loading="lazy"></a><figcaption><b>Components.</b> </figcaption></figure>
+<figure><a href="screenshots/14-explorer-ameba-lib-overview.png"><img src="screenshots/14-explorer-ameba-lib-overview.png" alt="Explorer · ameba-lib. The 14-dependant context diagram is cut off at default zoom." loading="lazy"></a><figcaption><b>Explorer · ameba-lib.</b> The 14-dependant context diagram is cut off at default zoom.</figcaption></figure>
+<figure><a href="screenshots/15-explorer-ameba-lib-container-diagram.png"><img src="screenshots/15-explorer-ameba-lib-container-diagram.png" alt="Module summary. Shows a raw citation range &quot;[F1-F3, …]&quot; (#78)." loading="lazy"></a><figcaption><b>Module summary.</b> Shows a raw citation range "[F1-F3, …]" (#78).</figcaption></figure>
+<figure><a href="screenshots/16-explorer-ameba-lib-component-diagram.png"><img src="screenshots/16-explorer-ameba-lib-component-diagram.png" alt="Component diagram. Packages after Fit." loading="lazy"></a><figcaption><b>Component diagram.</b> Packages after Fit.</figcaption></figure>
+<figure><a href="screenshots/17-explorer-ameba-lib-details-panel.png"><img src="screenshots/17-explorer-ameba-lib-details-panel.png" alt="Type details." loading="lazy"></a><figcaption><b>Type details.</b> </figcaption></figure>
+<figure><a href="screenshots/18-explorer-ameba-lib-dark.png"><img src="screenshots/18-explorer-ameba-lib-dark.png" alt="Dark mode." loading="lazy"></a><figcaption><b>Dark mode.</b> </figcaption></figure>
+<figure><a href="screenshots/19-explorer-ameba-lib-phone.png"><img src="screenshots/19-explorer-ameba-lib-phone.png" alt="Phone layout." loading="lazy"></a><figcaption><b>Phone layout.</b> </figcaption></figure>
+<figure><a href="screenshots/20-explorer-common.service-overview.png"><img src="screenshots/20-explorer-common.service-overview.png" alt="Explorer · common.service. Now built from compiled code." loading="lazy"></a><figcaption><b>Explorer · common.service.</b> Now built from compiled code.</figcaption></figure>
+<figure><a href="screenshots/21-explorer-common.service-container-diagram.png"><img src="screenshots/21-explorer-common.service-container-diagram.png" alt="Container diagram." loading="lazy"></a><figcaption><b>Container diagram.</b> </figcaption></figure>
+<figure><a href="screenshots/22-explorer-common.service-component-diagram.png"><img src="screenshots/22-explorer-common.service-component-diagram.png" alt="Components." loading="lazy"></a><figcaption><b>Components.</b> </figcaption></figure>
+<figure><a href="screenshots/23-explorer-core.uaa-overview.png"><img src="screenshots/23-explorer-core.uaa-overview.png" alt="Explorer · core.uaa. Now built from compiled code." loading="lazy"></a><figcaption><b>Explorer · core.uaa.</b> Now built from compiled code.</figcaption></figure>
+<figure><a href="screenshots/24-explorer-core.uaa-container-diagram.png"><img src="screenshots/24-explorer-core.uaa-container-diagram.png" alt="Container diagram." loading="lazy"></a><figcaption><b>Container diagram.</b> </figcaption></figure>
+<figure><a href="screenshots/25-explorer-core.uaa-component-diagram.png"><img src="screenshots/25-explorer-core.uaa-component-diagram.png" alt="Components." loading="lazy"></a><figcaption><b>Components.</b> </figcaption></figure>
+<figure><a href="screenshots/26-explorer-core.uaa-details-panel.png"><img src="screenshots/26-explorer-core.uaa-details-panel.png" alt="Type details." loading="lazy"></a><figcaption><b>Type details.</b> </figcaption></figure>
+<figure><a href="screenshots/27-brief-tms.transportation-full.png"><img src="screenshots/27-brief-tms.transportation-full.png" alt="Brief · tms.transportation. No risks found." loading="lazy"></a><figcaption><b>Brief · tms.transportation.</b> No risks found.</figcaption></figure>
+<figure><a href="screenshots/28-brief-tms.routing-full.png"><img src="screenshots/28-brief-tms.routing-full.png" alt="Brief · tms.routing. No risks now that it is on a release." loading="lazy"></a><figcaption><b>Brief · tms.routing.</b> No risks now that it is on a release.</figcaption></figure>
+<figure><a href="screenshots/29-brief-tms.routing-phone.png"><img src="screenshots/29-brief-tms.routing-phone.png" alt="Brief on a phone." loading="lazy"></a><figcaption><b>Brief on a phone.</b> </figcaption></figure>
+<figure><a href="screenshots/30-brief-wms.receiving-full.png"><img src="screenshots/30-brief-wms.receiving-full.png" alt="Brief · wms.receiving. A snapshot-dependency risk: it has no release." loading="lazy"></a><figcaption><b>Brief · wms.receiving.</b> A snapshot-dependency risk: it has no release.</figcaption></figure>
+<figure><a href="screenshots/31-brief-ameba-lib-full.png"><img src="screenshots/31-brief-ameba-lib-full.png" alt="Brief · ameba-lib. A package-cycle risk; the context diagram is too small." loading="lazy"></a><figcaption><b>Brief · ameba-lib.</b> A package-cycle risk; the context diagram is too small.</figcaption></figure>
+<figure><a href="screenshots/32-brief-common.service-full.png"><img src="screenshots/32-brief-common.service-full.png" alt="Brief · common.service." loading="lazy"></a><figcaption><b>Brief · common.service.</b> </figcaption></figure>
+<figure><a href="screenshots/33-brief-core.uaa-full.png"><img src="screenshots/33-brief-core.uaa-full.png" alt="Brief · core.uaa." loading="lazy"></a><figcaption><b>Brief · core.uaa.</b> </figcaption></figure>
+</div>
+
+<footer>Generated from <a href="https://github.com/reubenbubu/lantern">reubenbubu/lantern</a> at commit <a href="https://github.com/reubenbubu/lantern/commit/ec59f4f64e85cc612703a2ab5d6396fc2478461c">ec59f4f</a> using the OpenWMS test set pinned to release tags (all 16 repos in one snapshot). Summaries by DeepSeek <code>deepseek-chat</code>, prompt version 1.</footer>
+</main>
+</body>
+</html>

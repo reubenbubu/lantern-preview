@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lantern Run: Branch Heads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* Layout: single reading column; repo cards with links, then a screenshot gallery grid. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --fg: #1b2230; --muted: #5a6474;
+  --line: #dde1e8; --accent: #c2410c; --note-bg: #fff4e8;
+  --display: "Fraunces", Georgia, serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #11151c; --surface: #19202a; --fg: #e6e9ef; --muted: #9aa4b4;
+    --line: #2a3340; --accent: #fb923c; --note-bg: #2a1f14; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 var(--body); }
+main { max-width: 1080px; margin: 0 auto; padding-block: 40px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { font: 600 2.2rem/1.15 var(--display); margin: 0 0 8px; text-wrap: balance; }
+h2 { font: 600 1.35rem/1.2 var(--display); margin: 40px 0 12px; }
+p { max-width: 65ch; margin: 0 0 12px; }
+.lede { color: var(--muted); }
+.note { background: var(--note-bg); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 4px; max-width: 70ch; }
+.note p { margin: 0 0 6px; } .note p:last-child { margin: 0; }
+code, .mono { font-family: var(--mono); font-size: .9em; }
+.repos { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.repo { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; min-width: 0; }
+.repo h3 { margin: 0 0 4px; font: 600 1rem var(--mono); overflow-wrap: anywhere; }
+.repo p { color: var(--muted); font-size: .92rem; margin-bottom: 12px; }
+.links { display: flex; gap: 8px; flex-wrap: wrap; }
+.links a { text-decoration: none; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 4px 12px; font-weight: 500; font-size: .9rem; }
+.links a:hover, .links a:focus-visible { background: var(--accent); color: var(--surface); }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; min-width: 0; }
+figure a { display: block; }
+figure img { display: block; width: 100%; height: 200px; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); }
+figcaption { padding: 10px 12px; font-size: .88rem; color: var(--muted); }
+figcaption b { color: var(--fg); font-weight: 600; }
+footer { margin-top: 48px; color: var(--muted); font-size: .85rem; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<main>
+<p><a href="../../">&larr; All runs</a></p>
+<h1>Run: 28 Oct 2026, deepseek-chat, branch heads</h1>
+<p class="lede">Architecture documents Lantern generated from real OpenWMS code: the Architecture Explorer for engineers and the Executive Brief for leadership. Each link is one self-contained HTML file.</p>
+
+<div class="note">
+<p><b>LLM-written text.</b> The overview and summary sentences were written by DeepSeek's chat model (<code>deepseek-chat</code>) through Lantern's Anthropic-compatible provider. Lantern is designed for Claude, so wording quality may differ. Every summary cites the facts or summaries it is based on. Everything else comes from the real code: structure, diagrams, dependencies, facts with evidence, and risks.</p>
+<p><b>Test set.</b> All 15 OpenWMS repos of the time, each pinned to the head of its default branch on 28 Oct 2026. Those heads depend on unpublished SNAPSHOT versions of each other, so only 6 of the 15 built; the rest were read without a build (degraded mode). Prompt version 1.</p>
+<p><b>History.</b> These previews first used a fake LLM for their text; this run replaced it with summaries by DeepSeek. 1,102 LLM calls in all ($0.40), of which the 15-repo snapshot shown here took 733 calls ($0.28). A later run on release tags is listed on the <a href="../../">runs page</a>.</p>
+<p><b>Known issues:</b> wide diagrams open cut off until you press Fit; ameba-lib's context diagram (13 dependants) is too small in the Brief; edge lines cross some labels; in the Brief, a summary that cites another summary shows the cited element's name as stray text (for example "...for tracing on the compile scope ameba-lib."); long citation lists in the details panel wrap onto their own line; many summaries say the facts do not show what a type is for.</p>
+</div>
+
+<h2>Open a document</h2>
+<div class="repos">
+  <div class="repo">
+    <h3>tms.transportation</h3>
+    <p>Transport order service: 96 Java types in 14 packages. Its build succeeds, so its facts come from compiled code.</p>
+    <div class="links"><a href="explorer/tms.transportation.html">Explorer</a><a href="brief/tms.transportation.html">Brief</a></div>
+  </div>
+  <div class="repo">
+    <h3>tms.routing</h3>
+    <p>Routing service. Most of its code lives in the routing library it packages.</p>
+    <div class="links"><a href="explorer/tms.routing.html">Explorer</a><a href="brief/tms.routing.html">Brief</a></div>
+  </div>
+  <div class="repo">
+    <h3>wms.receiving</h3>
+    <p>Receiving service, a thin service around its receiving library.</p>
+    <div class="links"><a href="explorer/wms.receiving.html">Explorer</a><a href="brief/wms.receiving.html">Brief</a></div>
+  </div>
+  <div class="repo">
+    <h3>ameba-lib</h3>
+    <p>Shared library: 182 Java types in 32 packages, used by 13 other repos.</p>
+    <div class="links"><a href="explorer/ameba-lib.html">Explorer</a><a href="brief/ameba-lib.html">Brief</a></div>
+  </div>
+</div>
+
+<h2>Screenshots</h2>
+<div class="gallery">
+<figure><a href="screenshots/01-explorer-tms.routing-overview.png"><img src="screenshots/01-explorer-tms.routing-overview.png" alt="tms.routing Explorer first screen" loading="lazy"></a><figcaption><b>Explorer · tms.routing.</b> Navigation tree, overview and system context diagram.</figcaption></figure>
+<figure><a href="screenshots/02-explorer-tms.routing-container-diagram.png"><img src="screenshots/02-explorer-tms.routing-container-diagram.png" alt="tms.routing container diagram" loading="lazy"></a><figcaption><b>Container diagram.</b> The service jar, the libraries it depends on, and the one it packages.</figcaption></figure>
+<figure><a href="screenshots/03-explorer-tms.routing-component-diagram.png"><img src="screenshots/03-explorer-tms.routing-component-diagram.png" alt="tms.routing components and Maven tree" loading="lazy"></a><figcaption><b>Components and Maven tree.</b></figcaption></figure>
+<figure><a href="screenshots/04-explorer-tms.routing-details-panel.png"><img src="screenshots/04-explorer-tms.routing-details-panel.png" alt="details panel with facts and evidence" loading="lazy"></a><figcaption><b>Package details.</b> Its summary, the type it contains, and the facts behind it with file, commit and confidence.</figcaption></figure>
+<figure><a href="screenshots/05-explorer-tms.routing-dark.png"><img src="screenshots/05-explorer-tms.routing-dark.png" alt="Explorer in dark mode" loading="lazy"></a><figcaption><b>Dark mode.</b></figcaption></figure>
+<figure><a href="screenshots/06-explorer-tms.routing-phone.png"><img src="screenshots/06-explorer-tms.routing-phone.png" alt="Explorer at phone width" loading="lazy"></a><figcaption><b>Phone layout.</b></figcaption></figure>
+<figure><a href="screenshots/07-explorer-ameba-lib-overview.png"><img src="screenshots/07-explorer-ameba-lib-overview.png" alt="ameba-lib Explorer first screen" loading="lazy"></a><figcaption><b>Explorer · ameba-lib.</b> The 13-dependant context diagram is cut off at default zoom.</figcaption></figure>
+<figure><a href="screenshots/08-explorer-ameba-lib-container-diagram.png"><img src="screenshots/08-explorer-ameba-lib-container-diagram.png" alt="ameba-lib container diagram" loading="lazy"></a><figcaption><b>Container diagram.</b></figcaption></figure>
+<figure><a href="screenshots/09-explorer-ameba-lib-component-diagram.png"><img src="screenshots/09-explorer-ameba-lib-component-diagram.png" alt="ameba-lib component diagram" loading="lazy"></a><figcaption><b>Component diagram.</b> 32 packages and how they use each other, after Fit.</figcaption></figure>
+<figure><a href="screenshots/10-explorer-ameba-lib-details-panel.png"><img src="screenshots/10-explorer-ameba-lib-details-panel.png" alt="package details panel" loading="lazy"></a><figcaption><b>Package details.</b> Summary with citations, contained types, and evidence.</figcaption></figure>
+<figure><a href="screenshots/11-explorer-ameba-lib-dark.png"><img src="screenshots/11-explorer-ameba-lib-dark.png" alt="ameba-lib dark mode" loading="lazy"></a><figcaption><b>Dark mode.</b></figcaption></figure>
+<figure><a href="screenshots/12-explorer-ameba-lib-phone.png"><img src="screenshots/12-explorer-ameba-lib-phone.png" alt="ameba-lib at phone width" loading="lazy"></a><figcaption><b>Phone layout.</b></figcaption></figure>
+<figure><a href="screenshots/13-brief-tms.routing-full.png"><img src="screenshots/13-brief-tms.routing-full.png" alt="tms.routing Executive Brief" loading="lazy"></a><figcaption><b>Brief · tms.routing.</b> Headline numbers, a snapshot-dependency risk, and diagrams.</figcaption></figure>
+<figure><a href="screenshots/14-brief-wms.receiving-full.png"><img src="screenshots/14-brief-wms.receiving-full.png" alt="wms.receiving Executive Brief" loading="lazy"></a><figcaption><b>Brief · wms.receiving.</b></figcaption></figure>
+<figure><a href="screenshots/15-brief-ameba-lib-full.png"><img src="screenshots/15-brief-ameba-lib-full.png" alt="ameba-lib Executive Brief" loading="lazy"></a><figcaption><b>Brief · ameba-lib.</b> A package-cycle risk; the context diagram is too small.</figcaption></figure>
+<figure><a href="screenshots/16-brief-tms.routing-phone.png"><img src="screenshots/16-brief-tms.routing-phone.png" alt="Brief at phone width" loading="lazy"></a><figcaption><b>Brief on a phone.</b></figcaption></figure>
+<figure><a href="screenshots/17-explorer-tms.transportation-overview.png"><img src="screenshots/17-explorer-tms.transportation-overview.png" alt="tms.transportation Explorer first screen" loading="lazy"></a><figcaption><b>Explorer · tms.transportation.</b> LLM-written overview and system context.</figcaption></figure>
+<figure><a href="screenshots/18-explorer-tms.transportation-details-panel.png"><img src="screenshots/18-explorer-tms.transportation-details-panel.png" alt="type details panel with summary and citations" loading="lazy"></a><figcaption><b>Type details.</b> Summary of TransportationService with fact citations.</figcaption></figure>
+<figure><a href="screenshots/19-explorer-tms.transportation-component-diagram.png"><img src="screenshots/19-explorer-tms.transportation-component-diagram.png" alt="tms.transportation module summary and component diagram" loading="lazy"></a><figcaption><b>Module summary and components.</b> Each claim cites its facts.</figcaption></figure>
+<figure><a href="screenshots/20-brief-tms.transportation-full.png"><img src="screenshots/20-brief-tms.transportation-full.png" alt="tms.transportation Executive Brief" loading="lazy"></a><figcaption><b>Brief · tms.transportation.</b> No risks found; three repos it uses, two using it.</figcaption></figure>
+</div>
+
+<footer>Generated from <a href="https://github.com/reubenbubu/lantern">reubenbubu/lantern</a> at commit 3944a8f using the OpenWMS test set (all 15 repos in one snapshot). Summaries by DeepSeek <code>deepseek-chat</code>.</footer>
+</main>
+</body>
+</html>
